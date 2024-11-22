@@ -86,12 +86,15 @@ justify-content: space-between;
     font-size: 16px;
     line-height: 20px;
 }
-
-.weather-forecast-icon{
-    font-size: 38px;
-    text-align: center;
-
+.weather-forecast-icon {
+    width: 88px;
+    height: 88px;
+    display: block;
+    margin: 0 auto;
 }
+
+
+
 
 .weather-forecast-temperatures{
     text-align: center;
@@ -103,6 +106,7 @@ justify-content: space-between;
 
 .weather-forecast-temperature{
     padding: 0 10px;
+    color: #f65282;
 }
 
 
