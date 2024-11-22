@@ -7,7 +7,6 @@ function refreshWeather(response) {
     let windElement = document.querySelector("#wind");
     let timeElement = document.querySelector("#time");
     let date = new Date(response.data.time * 1000);
-
     let iconElement = document.querySelector ("#icon");
 
     
@@ -19,6 +18,8 @@ windElement.innerHTML = `${response.data.wind.speed}km/h`;
 humidityElement.innerHTML = `${response.data.temperature.humidity}%`;
 descriptionElement.innerHTML = response.data.condition.description;
 temperatureElement.innerHTML = Math.round(temperature);
+
+getForecast(response.data.city);
 }
 
 function formatDate(date) {
@@ -37,7 +38,7 @@ function formatDate(date) {
 
 function searchCity(city){
 let apiKey = "53f2071330t4ac47ab120653c94o340f";
-let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}`;
+let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
 
 axios.get(apiUrl).then(refreshWeather);
 
@@ -56,12 +57,23 @@ function handleSearchSubmit(event){
 searchCity(searchInput.value);
 }
 
+function getForecast(city){
+    let apiKey ="53f2071330t4ac47ab120653c94o340f";
+    let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metric`;
+
+    axios.get(apiUrl).then(displayForecast);
+
+}
 
 
-function displayForecast (){
-    let forecastElement = document.querySelector("#forecast");
 
-    let days = ["Tue", "Wed", "Thur", "Fri", "Sat"];
+
+
+function displayForecast (response){
+   
+    
+
+let days = ["Tue", "Wed", "Thur", "Fri", "Sat"];
 let forecastHtml = "";
 
 
@@ -81,7 +93,7 @@ let forecastHtml = "";
     `;
     }) ;
 
-
+    let forecastElement = document.querySelector("#forecast");
     forecastElement.innerHTML = forecastHtml
 }
 
@@ -94,5 +106,5 @@ let searchFormElement = document.querySelector("#search-form");
 searchFormElement.addEventListener("submit", handleSearchSubmit);
 
 searchCity("Mielec");
-displayForecast();
-displayForecast();
+
+
